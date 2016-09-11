@@ -109,8 +109,14 @@ def Rtmpdump_models():
         # /home/tom/Projects/CaptureBate/Captured/Chaturbate_2016.31.08_22.04_sexydevilxx.flv
         # http://chaturbate.com/sexydevilxx best
 
-        pid = fields[0]
-        process = fields[5]
+        try:
+            pid = fields[0]
+            process = fields[5]
+        except IndexError as e:
+            print fields
+            print e
+            continue
+
         if "livestreamer" in process:
             if Video_folder in fields[9]:
                 if "http://chaturbate.com/" in (fields[10]):
