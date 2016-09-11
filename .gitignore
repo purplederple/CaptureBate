@@ -1,2 +1,7 @@
 *.pyc
 virtualenv
+config.conf
+output.log
+Captured/*
+Converted/*
+Scripts/*

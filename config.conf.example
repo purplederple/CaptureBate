@@ -2,16 +2,17 @@
 URL = https://chaturbate.com/auth/login/
 URL_follwed = https://chaturbate.com/followed-cams/
 [credentials]
-USER = testingallthethings
-PASS = 2YY84bKlOC79KNQ
+USER = CHATURBATE_USERNAME
+PASS = CHATURBATE_PASSWORD
 [folders]
 Video_folder = Captured
 Script_folder = Scripts
+Converted_folder = Converted
 [files]
 Log_file = output.log
 wishlist_file = wishlist.txt
 [delays]
-Time_delay = 45
+Time_delay = 30
 [version]
 Version = 8.0
 [debug]
