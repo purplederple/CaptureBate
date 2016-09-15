@@ -74,7 +74,7 @@ def Get_links(client, Models_list_store):
             # write models livestreamer string to file
             flinks = open(Script_folder + '/' + model + '.sh', 'w')
             ts = time.time()
-            st = datetime.datetime.fromtimestamp(ts).strftime('%Y%d%m_%H%M%S')
+            st = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S')
 
             form_dict = {
                 "model_name": model,
