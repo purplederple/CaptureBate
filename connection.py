@@ -18,7 +18,7 @@ def Connection():
             # Retrieve the CSRF token first
             r1 = client.get(URL)
             break
-        except Exception, e:
+        except Exception as e:
             logging.error('Some error during connecting to ' + URL)
             logging.error(e)
             logging.error('Trying again after 60 seconds')
@@ -39,7 +39,7 @@ def Connection():
         # if Debugging is enabled Page source goes to debug.log file
         if Debugging is True:
             Store_Debug(page_source, "connection.log")
-    except Exception, e:
+    except Exception as e:
         logging.error('Some error during posting to ' + URL)
         logging.error(e)
     return client

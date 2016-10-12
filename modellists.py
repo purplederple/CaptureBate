@@ -15,7 +15,7 @@ def Models_list(client):
     try:
         logging.info("Redirecting to " + URL_follwed)
         r2 = client.get(URL_follwed)
-    except Exception, e:
+    except Exception as e:
         logging.error('Some error during connecting to ' + URL)
         logging.error(e)
         return []
@@ -90,7 +90,7 @@ fi;
 """ % form_dict
             flinks.write(script)
             flinks.close()
-            os.chmod(Script_folder + '/' + model + '.sh', 0777)
+            os.chmod(Script_folder + '/' + model + '.sh', 0o777)
             logging.info('[Get_links] ' + model + '.sh is created')
     else:
         logging.warning('[Get_links] No models to get!')
@@ -114,8 +114,8 @@ def Rtmpdump_models():
             pid = fields[0]
             process = fields[5]
         except IndexError as e:
-            print fields
-            print e
+            print (fields)
+            print (e)
             continue
 
         if "livestreamer" in process:
