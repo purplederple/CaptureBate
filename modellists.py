@@ -19,8 +19,9 @@ def Models_list(client):
         logging.error('Some error during connecting to ' + URL)
         logging.error(e)
         return []
-    soup = BeautifulSoup(r2.text)
-    #logging.debug('Page Source for ' + URL_follwed + '\n' + r2.text)
+    soup = BeautifulSoup(r2.text, "html.parser")
+    # print('Page Source for ' + URL_follwed + '\n' + r2.text)
+
     page_source = 'Page Source for ' + URL_follwed + '\n' + r2.text
     if Debugging == True:
         Store_Debug(page_source, "modellist.log")
@@ -83,7 +84,7 @@ def Get_links(client, Models_list_store):
                 "date_string": st,
             }
             script = """#!/bin/sh
-livestreamer --force --quiet --output "%(video_folder)s/Chaturbate_%(model_name)s_%(date_string)s.flv" http://chaturbate.com/%(model_name)s best
+streamlink --force --quiet --output "%(video_folder)s/Chaturbate_%(model_name)s_%(date_string)s.flv" http://chaturbate.com/%(model_name)s best
 if ffmpeg -loglevel quiet -i "%(video_folder)s/Chaturbate_%(model_name)s_%(date_string)s.flv" -vcodec copy -acodec libmp3lame "%(converted_folder)s/Chaturbate_%(model_name)s_%(date_string)s.flv.mp4"; then
     rm "%(video_folder)s/Chaturbate_%(model_name)s_%(date_string)s.flv"
 fi;
@@ -98,7 +99,7 @@ fi;
 
 def Rtmpdump_models():
     models = []
-    for line in os.popen("ps xa | grep livestreamer| grep -v 'grep'"):
+    for line in os.popen("ps xa | grep streamlink | grep -v 'grep'"):
         fields = line.split()
         # EXAMPLE: ['65192', 'pts/7', 'Sl+', '0:01', '/usr/bin/python',
         # '/usr/local/bin/livestreamer', '--output',
@@ -118,13 +119,13 @@ def Rtmpdump_models():
             print (e)
             continue
 
-        if "livestreamer" in process:
+        if "streamlink" in process:
             if Video_folder in fields[9]:
                 if "http://chaturbate.com/" in (fields[10]):
                     models.append(fields[10][22:])
             else:
                 logging.debug('Not In Video Folder: \n' + fields)
-    logging.debug('Livestreamer shows the following models: \n' + str(models))
+    logging.debug('Streamlink shows the following models: \n' + str(models))
     return models
 
 

@@ -17,7 +17,8 @@ if __name__ == '__main__':
     Preconditions(Video_folder)
     Preconditions(Converted_folder)
     # Connecting to server
-    client = connection.Connection()
+    client_factory = connection.ClientFactory()
+    client = connection.Connection(client_factory)
     # Get the models list and create main list
     Models_list_store = modellists.Models_list(client)
     # Select models for recording according to wishlist
@@ -29,10 +30,18 @@ if __name__ == '__main__':
     # First delay before loop
     logging.info('Waiting for %d seconds' % Time_delay)
     sleep(Time_delay)
+
+
     while True:
         # Reassign updated main models list
         # Connecting to server
-        client = connection.Connection()
+        try:
+            client = connection.Connection(client_factory)
+        except KeyError:
+            # Sometimes missing CSRF token, which raises KeyError. Just go
+            # again if this happens.
+            continue
+
         #Models_list_store = Compare_lists(Models_list_store, Models_list(client))
         logging.info(str(len(Models_list_store)) +
                      ' Models in the list before checking: ' + str(Models_list_store))

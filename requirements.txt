@@ -1,7 +1,7 @@
-argparse==1.2.1
-beautifulsoup4==4.3.2
-requests==2.4.3
-urllib3==1.9.1
-wsgiref==0.1.2
-livestreamer==1.12.2
-futures==3.0.5
+argparse
+beautifulsoup4
+requests
+urllib3
+# wsgiref
+streamlink
+futures
